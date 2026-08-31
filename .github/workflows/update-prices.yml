@@ -1,0 +1,98 @@
+name: Update oil prices
+
+on:
+  schedule:
+    # 10:00 UTC = 17:00 Asia/Bangkok, daily.
+    - cron: "0 10 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: update-prices
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Fetch and sanity-check prices
+        id: fetch
+        run: node scripts/fetch-prices.mjs 2>&1 | tee fetch.log
+
+      - name: Commit updated prices
+        run: |
+          if git diff --quiet -- data/oil-prices.json; then
+            echo "No price change — nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/oil-prices.json
+          git commit -m "data: update oil prices ($(date -u +%Y-%m-%d))"
+          git push
+
+      - name: Open an issue when the update fails
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const log = fs.existsSync('fetch.log')
+              ? fs.readFileSync('fetch.log', 'utf8').slice(-4000)
+              : '(no log captured)';
+            const raw = fs.existsSync('data/last-raw-response.json')
+              ? fs.readFileSync('data/last-raw-response.json', 'utf8').slice(0, 6000)
+              : '(no raw response captured)';
+            const title = 'อัปเดตราคาน้ำมันล้มเหลว — ต้องตรวจสอบด้วยตนเอง';
+
+            // Reuse the open issue instead of piling up one per failed day.
+            const { data: open } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'price-update-failed',
+            });
+            const body = [
+              `Run: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+              '',
+              '`data/oil-prices.json` ถูกคงค่าเดิมไว้ ไม่มีการ deploy ราคาใหม่',
+              '',
+              '### Log',
+              '```',
+              log,
+              '```',
+              '',
+              '<details><summary>Raw API response</summary>',
+              '',
+              '```json',
+              raw,
+              '```',
+              '',
+              '</details>',
+            ].join('\n');
+
+            if (open.length) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: open[0].number,
+                body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['price-update-failed'],
+              });
+            }
