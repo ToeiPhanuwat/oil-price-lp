@@ -7,6 +7,8 @@ export const SITE_URL = (
 export const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
 
 // The `content` value of the Search Console "HTML tag" verification meta tag.
-// Only the token, not the whole <meta> element. Omitted from <head> when unset.
+// Public by design — it ships in the page's <head> — so it lives in the repo
+// rather than in an env var. Override per-environment if the property changes.
 export const GOOGLE_SITE_VERIFICATION =
-  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? "";
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ??
+  "SSkWnKP5Q90m4tObo371iEbt4Yt18toa31A7eavGraA";
