@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Noto_Sans_Thai } from "next/font/google";
-import { GA_ID, SITE_URL } from "@/lib/site";
+import { GA_ID, GOOGLE_SITE_VERIFICATION, SITE_URL } from "@/lib/site";
 import { formatDate, latestEffectiveDate } from "@/lib/prices";
 import "./globals.css";
 
@@ -30,6 +30,9 @@ export const metadata: Metadata = {
     description: `ราคาน้ำมันขายปลีกทุกยี่ห้อในไทย อัปเดตล่าสุด ${effective}`,
   },
   robots: { index: true, follow: true },
+  ...(GOOGLE_SITE_VERIFICATION && {
+    verification: { google: GOOGLE_SITE_VERIFICATION },
+  }),
 };
 
 export default function RootLayout({
