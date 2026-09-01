@@ -31,5 +31,6 @@ npm run dev       # http://localhost:3000
 | --- | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | `https://example.com` | canonical URL, sitemap, robots |
 | `NEXT_PUBLIC_GA_ID` | `G-XXXXXXXXXX` | Google Analytics 4 (ไม่ตั้ง = ไม่ฝัง script) |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | `abc123...` | โค้ดยืนยัน Search Console (HTML tag) |
 
 รายละเอียดเป้าหมายและขอบเขตโปรเจกต์อยู่ใน [`PROJECT_SPEC.md`](./PROJECT_SPEC.md)

@@ -39,7 +39,8 @@ npm run fetch:dry  # validate the API without writing
 
 ## Environment
 
-Set in Vercel (both are optional; the site builds without them):
+Set in Vercel (all optional; the site builds without them):
 
 - `NEXT_PUBLIC_SITE_URL` — canonical origin, used for metadata/sitemap/robots.
 - `NEXT_PUBLIC_GA_ID` — GA4 measurement ID; analytics is skipped when unset.
+- `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` — Search Console HTML-tag token.
