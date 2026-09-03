@@ -9,7 +9,7 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { API_URL, BRANDS, PRODUCTS, LIMITS } from "./config.mjs";
+import { API_URL, BRANDS, IGNORED_BRANDS, PRODUCTS, LIMITS } from "./config.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = resolve(ROOT, "data/oil-prices.json");
@@ -53,7 +53,7 @@ function normalize(payload) {
   }
 
   const unknownBrands = Object.keys(data).filter(
-    (k) => !BRANDS.some((b) => b.key === k),
+    (k) => !BRANDS.some((b) => b.key === k) && !IGNORED_BRANDS.includes(k),
   );
   if (unknownBrands.length) {
     warnings.push(`New brand keys not in scripts/config.mjs: ${unknownBrands.join(", ")}`);

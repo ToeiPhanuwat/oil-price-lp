@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Noto_Sans_Thai } from "next/font/google";
-import { GA_ID, GOOGLE_SITE_VERIFICATION, SITE_URL } from "@/lib/site";
+import { Prompt } from "next/font/google";
+import { GA_ID, GOOGLE_SITE_VERIFICATION, OG_IMAGE, SITE_URL } from "@/lib/site";
 import { formatDate, latestEffectiveDate } from "@/lib/prices";
 import "./globals.css";
 
-const notoSansThai = Noto_Sans_Thai({
+const prompt = Prompt({
   subsets: ["thai", "latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
   variable: "--font-thai",
 });
@@ -28,6 +29,20 @@ export const metadata: Metadata = {
     siteName: "ราคาน้ำมันวันนี้",
     title: `ราคาน้ำมันวันนี้ ${effective} — เช็คราคาทุกปั๊ม`,
     description: `ราคาน้ำมันขายปลีกทุกยี่ห้อในไทย อัปเดตล่าสุด ${effective}`,
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: `ราคาน้ำมันวันนี้ ${effective}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `ราคาน้ำมันวันนี้ ${effective}`,
+    description: `ราคาน้ำมันขายปลีกทุกยี่ห้อในไทย อัปเดตล่าสุด ${effective}`,
+    images: [OG_IMAGE],
   },
   robots: { index: true, follow: true },
   ...(GOOGLE_SITE_VERIFICATION && {
@@ -35,12 +50,16 @@ export const metadata: Metadata = {
   }),
 };
 
+export const viewport: Viewport = {
+  themeColor: "#020617",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="th">
-      <body className={notoSansThai.variable}>
+      <body className={prompt.variable}>
         {children}
         {GA_ID && (
           <>

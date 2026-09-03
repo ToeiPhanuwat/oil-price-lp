@@ -1,24 +1,16 @@
 :root {
-  --bg: #f6f7f9;
-  --surface: #ffffff;
-  --border: #e2e5ea;
-  --text: #14181f;
-  --muted: #5d6673;
-  --accent: #0b6b3a;
-  --accent-soft: #eaf5ee;
-  color-scheme: light dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #10131a;
-    --surface: #171b24;
-    --border: #272d38;
-    --text: #eef1f5;
-    --muted: #99a2b0;
-    --accent: #4ade80;
-    --accent-soft: #16251c;
-  }
+  --bg: #020617;
+  --surface: #0f172a;
+  --surface-2: #1e293b;
+  --surface-3: #334155;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --dim: #64748b;
+  --accent: #fbbf24;
+  --cheap: #34d399;
+  --cheap-soft: rgba(16, 185, 129, 0.15);
+  color-scheme: dark;
 }
 
 * {
@@ -31,82 +23,290 @@ html {
 
 body {
   margin: 0;
-  padding: 0 16px 48px;
+  padding: 0;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-thai), system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 16px;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-header,
-main,
-footer {
-  max-width: 1100px;
+::selection {
+  background: var(--accent);
+  color: #020617;
+}
+
+main {
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 16px 12px 0;
 }
 
-.header {
-  padding: 28px 0 20px;
+/* ---------- Card ---------- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+}
+
+.card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brandmark {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to top right, #f59e0b, #f97316);
+  color: #020617;
+  box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.2);
+}
+
+.brandmark svg {
+  width: 24px;
+  height: 24px;
+}
+
+.card-title {
+  min-width: 0;
 }
 
 h1 {
-  margin: 0 0 8px;
-  font-size: clamp(1.6rem, 6vw, 2.25rem);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-}
-
-.effective {
   margin: 0;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--accent);
+  font-size: clamp(1.05rem, 4.5vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: #ffffff;
 }
 
-.updated {
-  margin: 4px 0 0;
-  font-size: 0.875rem;
+h1 .date {
+  color: var(--accent);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 2px 0 0;
+  font-size: 0.8rem;
   color: var(--muted);
 }
 
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cheap);
+  animation: blink 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* ---------- Highlight toggle ---------- */
+
+.toggle {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--surface-3);
+  background: var(--surface-2);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.toggle[aria-pressed="true"] {
+  border-color: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--cheap);
+}
+
+.toggle:hover {
+  background: var(--surface-3);
+}
+
+.toggle[aria-pressed="true"]:hover {
+  background: rgba(16, 185, 129, 0.2);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.toggle .icon {
+  width: 13px;
+  height: 13px;
+  color: var(--accent);
+}
+
+/* ---------- Table ---------- */
+
 .table-wrap {
-  overflow-x: auto;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  overflow: auto;
+  /* Only bites on short viewports; on a normal desktop window the whole table
+     fits and the page keeps a single scrollbar. When it does bite, the column
+     headers stay pinned as you scroll the rows. */
+  max-height: min(80vh, 640px);
   -webkit-overflow-scrolling: touch;
+  scrollbar-color: rgba(51, 65, 85, 0.8) rgba(15, 23, 42, 0.6);
 }
 
 .table-wrap:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: -2px;
+}
+
+.table-wrap::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-wrap::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 4px;
+}
+
+.table-wrap::-webkit-scrollbar-thumb {
+  background: rgba(51, 65, 85, 0.8);
+  border-radius: 4px;
+}
+
+.table-wrap::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 1);
 }
 
 table {
   border-collapse: separate;
   border-spacing: 0;
   width: 100%;
-  font-variant-numeric: tabular-nums;
+  min-width: 940px;
+  font-size: 0.85rem;
 }
 
 th,
 td {
-  padding: 10px 12px;
-  text-align: right;
+  padding: 10px 8px;
+  text-align: center;
   white-space: nowrap;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(30, 41, 59, 0.8);
+  border-right: 1px solid rgba(30, 41, 59, 0.5);
 }
 
 thead th {
   position: sticky;
   top: 0;
   z-index: 2;
-  background: var(--surface);
-  font-size: 0.8rem;
+  background: var(--bg);
   font-weight: 600;
-  color: var(--muted);
   vertical-align: bottom;
+}
+
+thead .corner {
+  z-index: 3;
+  text-align: left;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.8rem;
+  box-shadow: 2px 0 6px rgba(2, 6, 23, 0.6);
+}
+
+.brand-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.brand-name {
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+.stale {
+  font-size: 0.62rem;
+  font-weight: 400;
+  color: var(--dim);
+}
+
+/* Fuel-type column: sticky on the left, above the body but below the corner. */
+.fuel-col {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 168px;
+  background: var(--surface);
+  text-align: right;
+  font-weight: 500;
+  color: var(--text);
+  border-right: 1px solid var(--border);
+  box-shadow: 2px 0 6px rgba(2, 6, 23, 0.4);
+}
+
+/* A cell cannot be a flex container without leaving table layout, so the row
+   header lays its label and badge out in an inner span. */
+.fuel-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.fuel-col.premium {
+  color: #fcd34d;
+}
+
+.badge {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(245, 158, 11, 0.2);
+  color: #fcd34d;
+  font-size: 0.6rem;
+  font-weight: 400;
+}
+
+tbody tr:hover th,
+tbody tr:hover td {
+  background: rgba(30, 41, 59, 0.6);
 }
 
 tbody tr:last-child th,
@@ -114,61 +314,82 @@ tbody tr:last-child td {
   border-bottom: 0;
 }
 
-.brand-col {
-  position: sticky;
-  left: 0;
-  z-index: 1;
-  background: var(--surface);
-  text-align: left;
-  font-weight: 600;
-  border-right: 1px solid var(--border);
-}
-
-thead .brand-col {
-  z-index: 3;
-}
-
-.stale {
-  display: block;
-  font-size: 0.7rem;
-  font-weight: 400;
-  color: var(--muted);
-}
-
 .price {
-  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
 .empty {
-  color: var(--muted);
+  color: var(--dim);
 }
 
-tbody tr:nth-child(even) th,
-tbody tr:nth-child(even) td {
-  background: var(--accent-soft);
+.value {
+  position: relative;
+  display: inline-block;
 }
+
+.cheapest {
+  color: var(--cheap);
+  font-weight: 700;
+  background: var(--cheap-soft);
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.4);
+  animation: subtle-pulse 3s infinite ease-in-out;
+}
+
+tbody tr:hover .cheapest {
+  background: var(--cheap-soft);
+}
+
+.star {
+  position: absolute;
+  top: -3px;
+  right: -11px;
+  width: 8px;
+  height: 8px;
+  color: var(--accent);
+}
+
+@keyframes subtle-pulse {
+  0%,
+  100% {
+    background-color: rgba(16, 185, 129, 0.15);
+  }
+  50% {
+    background-color: rgba(16, 185, 129, 0.28);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cheapest,
+  .dot {
+    animation: none;
+  }
+}
+
+/* ---------- Below the table ---------- */
 
 .hint {
   margin: 8px 2px 0;
-  font-size: 0.8rem;
-  color: var(--muted);
+  font-size: 0.75rem;
+  color: var(--dim);
   text-align: center;
 }
 
 .notes {
-  margin-top: 36px;
+  margin-top: 28px;
 }
 
 .notes h2 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin: 0 0 8px;
+  color: #ffffff;
 }
 
 .notes ul {
   margin: 0;
   padding-left: 1.2em;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .notes li {
@@ -180,11 +401,17 @@ a {
 }
 
 footer {
-  margin-top: 36px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-  font-size: 0.8rem;
-  color: var(--muted);
+  margin-top: 28px;
+  padding: 16px;
+  border-top: 1px solid rgba(30, 41, 59, 0.8);
+  font-size: 0.75rem;
+  color: var(--dim);
+  text-align: center;
+}
+
+footer p {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .sr-only {

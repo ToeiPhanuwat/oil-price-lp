@@ -1,14 +1,23 @@
+import { PriceTable, type BrandColumn } from "./PriceTable";
 import {
   brandList,
-  columns,
   formatDate,
+  formatDateShort,
   formatUpdatedAt,
   latestEffectiveDate,
   prices,
+  rows,
 } from "@/lib/prices";
-import { SITE_URL } from "@/lib/site";
+import { OG_IMAGE, SITE_URL } from "@/lib/site";
 
 const effective = formatDate(latestEffectiveDate);
+
+const brandColumns: BrandColumn[] = brandList.map((brand) => ({
+  key: brand.key,
+  name: brand.name,
+  staleDate:
+    brand.effective_date !== latestEffectiveDate ? formatDate(brand.effective_date) : null,
+}));
 
 // Schema.org ItemList of Product/Offer so the prices are machine-readable.
 const structuredData = {
@@ -23,14 +32,22 @@ const structuredData = {
     item: {
       "@type": "Product",
       name: `น้ำมัน ${brand.name}`,
+      description:
+        `ราคาน้ำมันขายปลีกของ ${brand.name} ในเขตกรุงเทพฯ และปริมณฑล ` +
+        `มีผล ${formatDate(brand.effective_date)} หน่วยเป็นบาทต่อลิตร`,
+      image: OG_IMAGE,
       brand: { "@type": "Brand", name: brand.name },
       offers: Object.entries(brand.products).map(([slug, product]) => ({
         "@type": "Offer",
         name: product.name,
         sku: `${brand.key}-${slug}`,
+        url: SITE_URL,
         price: product.price,
         priceCurrency: "THB",
-        priceValidUntil: product.effective_date,
+        // Valid from the moment the announcement takes effect. No
+        // `priceValidUntil`: the next announcement's date is unknowable, and a
+        // date already in the past would mark the offer expired.
+        validFrom: product.effective_date,
         availability: "https://schema.org/InStock",
         eligibleQuantity: {
           "@type": "QuantitativeValue",
@@ -50,60 +67,15 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      <header className="header">
-        <h1>ราคาน้ำมันวันนี้</h1>
-        <p className="effective">ราคามีผล {effective} เวลา 05:00 น.</p>
-        <p className="updated">
-          อัปเดตล่าสุดเมื่อ{" "}
-          <time dateTime={prices.updated_at}>
-            {formatUpdatedAt(prices.updated_at)} น.
-          </time>
-        </p>
-      </header>
-
       <main>
-        <div className="table-wrap" role="region" aria-label="ตารางราคาน้ำมันแยกตามยี่ห้อ" tabIndex={0}>
-          <table>
-            <caption className="sr-only">
-              ราคาน้ำมันขายปลีกในเขตกรุงเทพฯ และปริมณฑล หน่วยเป็นบาทต่อลิตร
-            </caption>
-            <thead>
-              <tr>
-                <th scope="col" className="brand-col">
-                  ยี่ห้อ
-                </th>
-                {columns.map((column) => (
-                  <th scope="col" key={column.slug}>
-                    {column.name}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {brandList.map((brand) => (
-                <tr key={brand.key}>
-                  <th scope="row" className="brand-col">
-                    {brand.name}
-                    {brand.effective_date !== latestEffectiveDate && (
-                      <span className="stale" title="ยี่ห้อนี้ยังไม่ได้ประกาศราคาใหม่">
-                        ณ {formatDate(brand.effective_date)}
-                      </span>
-                    )}
-                  </th>
-                  {columns.map((column) => {
-                    const product = brand.products[column.slug];
-                    return (
-                      <td key={column.slug} className={product ? "price" : "empty"}>
-                        {product ? product.price.toFixed(2) : "-"}
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="hint">← เลื่อนตารางเพื่อดูน้ำมันชนิดอื่น →</p>
+        <PriceTable
+          rows={rows}
+          brands={brandColumns}
+          effective={formatDateShort(latestEffectiveDate)}
+          updatedAt={formatUpdatedAt(prices.updated_at)}
+          updatedAtISO={prices.updated_at}
+        />
+        <p className="hint">← เลื่อนตารางเพื่อดูยี่ห้ออื่น →</p>
 
         <section className="notes">
           <h2>เกี่ยวกับราคานี้</h2>
@@ -112,6 +84,10 @@ export default function Home() {
             <li>เครื่องหมาย &ldquo;-&rdquo; หมายถึงยี่ห้อนั้นไม่มีน้ำมันชนิดนั้นจำหน่าย</li>
             <li>
               แต่ละยี่ห้อประกาศราคาไม่พร้อมกัน ยี่ห้อที่ราคายังไม่อัปเดตจะมีวันที่กำกับไว้
+            </li>
+            <li>
+              ราคาที่ถูกที่สุดของน้ำมันแต่ละชนิดจะไฮไลต์สีเขียว
+              โดยไม่นับยี่ห้อที่ราคายังไม่อัปเดต
             </li>
             <li>
               แหล่งข้อมูล:{" "}

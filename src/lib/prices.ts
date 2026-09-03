@@ -41,9 +41,15 @@ const thaiDate = new Intl.DateTimeFormat("th-TH", {
   timeZone: "Asia/Bangkok",
 });
 
-const thaiDateTime = new Intl.DateTimeFormat("th-TH", {
-  dateStyle: "long",
+// Short form for the header, where the long month name would crowd the title.
+const thaiDateShort = new Intl.DateTimeFormat("th-TH", {
+  dateStyle: "medium",
+  timeZone: "Asia/Bangkok",
+});
+
+const thaiTime = new Intl.DateTimeFormat("th-TH", {
   timeStyle: "short",
+  hour12: false,
   timeZone: "Asia/Bangkok",
 });
 
@@ -52,8 +58,16 @@ export function formatDate(iso: string | null) {
   return thaiDate.format(new Date(`${iso}T00:00:00+07:00`));
 }
 
+/** e.g. "2 ก.ย. 2569" */
+export function formatDateShort(iso: string | null) {
+  if (!iso) return "-";
+  return thaiDateShort.format(new Date(`${iso}T00:00:00+07:00`));
+}
+
+/** e.g. "3 ก.ย. 2569 เวลา 23:58" */
 export function formatUpdatedAt(iso: string) {
-  return thaiDateTime.format(new Date(iso));
+  const at = new Date(iso);
+  return `${thaiDateShort.format(at)} เวลา ${thaiTime.format(at)}`;
 }
 
 /** The most recent effective date across all brands — what the page headline
@@ -63,3 +77,51 @@ export const latestEffectiveDate = brandList
   .filter((d): d is string => Boolean(d))
   .sort()
   .at(-1) ?? null;
+
+export type PriceCell = { brandKey: string; price: number | null };
+
+export type PriceRow = {
+  slug: string;
+  name: string;
+  /** Premium grades get an amber badge in the first column. */
+  isPremium: boolean;
+  cells: PriceCell[];
+  /** Brands holding the lowest price in this row. Empty when there is nothing
+   *  to compare — a single seller, or every brand quoting the same price. */
+  cheapestBrands: string[];
+};
+
+/** Brands that have published the latest round of prices. A brand that has not
+ *  is excluded from the "cheapest" comparison: its number is real but months
+ *  old, so crowning it the best deal of the day would mislead. */
+const currentBrands = new Set(
+  brandList
+    .filter((brand) => brand.effective_date === latestEffectiveDate)
+    .map((brand) => brand.key),
+);
+
+/** The table reads product-by-brand: one row per fuel type, one column per
+ *  brand. Built from `columns` and `brandList` so it inherits their ordering
+ *  and the "drop products nobody sells" filter. */
+export const rows: PriceRow[] = columns.map((column) => {
+  const cells = brandList.map((brand) => ({
+    brandKey: brand.key,
+    price: brand.products[column.slug]?.price ?? null,
+  }));
+
+  const comparable = cells.filter(
+    (cell): cell is { brandKey: string; price: number } =>
+      cell.price !== null && currentBrands.has(cell.brandKey),
+  );
+  const prices = comparable.map((cell) => cell.price);
+  const lowest = new Set(prices).size > 1 ? Math.min(...prices) : null;
+
+  return {
+    ...column,
+    isPremium: column.slug.includes("premium"),
+    cells,
+    cheapestBrands: comparable
+      .filter((cell) => cell.price === lowest)
+      .map((cell) => cell.brandKey),
+  };
+});

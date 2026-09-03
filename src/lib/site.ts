@@ -3,6 +3,10 @@ export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://oil-price-lp.vercel.app"
 ).replace(/\/$/, "");
 
+// Social-share card, generated at build time by src/app/og.png/route.tsx.
+// Also used as the `image` of the Product structured data.
+export const OG_IMAGE = `${SITE_URL}/og.png`;
+
 // Google Analytics 4 measurement ID (G-XXXXXXXXXX). Analytics is skipped when unset.
 export const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
 
