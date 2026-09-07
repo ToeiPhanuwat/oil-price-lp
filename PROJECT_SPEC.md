@@ -76,7 +76,7 @@ API ข้างต้นให้แค่ราคาปัจจุบัน 
 
 ```json
 {
-  "updated_at": "2026-08-16T17:00:00+07:00",
+  "updated_at": "2026-08-16T05:00:00+07:00",
   "brands": {
     "ptt": {
       "name": "PTT",
@@ -91,11 +91,16 @@ API ข้างต้นให้แค่ราคาปัจจุบัน 
 }
 ```
 
+`updated_at` คือค่าที่หน้าเว็บแสดงเป็น "อัปเดตล่าสุด" — ถ้าราคาเปลี่ยนจะเป็นเวลาที่เขียนไฟล์จริง
+ถ้าไม่เปลี่ยน รอบแรกของวันตั้งแต่ 05:00 น. จะเขียนทับเป็น 05:00 น. ของวันนั้น เพื่อไม่ให้ป้ายดูค้าง
+
 `next_day` เผื่อไว้สำหรับฟีเจอร์ราคาพรุ่งนี้ในอนาคต (โครงสร้างคล้าย `products` แต่มี `effective_at` เป็นวันพรุ่งนี้ตี 5)
 
 ## Automation Flow
 
-1. **GitHub Actions scheduled workflow** รันวันละ 1 ครั้ง (เวลาที่แนะนำ: 17:00 Asia/Bangkok — ตั้ง cron เป็น UTC ให้ตรง คือ 10:00 UTC)
+1. **GitHub Actions scheduled workflow** รันวันละ 5 รอบตามเวลาไทย (ตั้ง cron เป็น UTC): 05:00
+   และ 06:00 คือหลังราคาใหม่มีผล จึงเผยแพร่ทันที; 17:30 และ 22:00 ไว้รับประกาศตอนเย็นที่ถือวันมีผล
+   เป็นพรุ่งนี้ ซึ่งจะถูกดองไว้ก่อน แล้ว 00:00 เป็นรอบที่ปล่อยออก
 2. Fetch JSON จาก `https://www.eppo.go.th/wp-json/oil-api/v1/oil-prices`
 3. **Sanity check ก่อนเขียนทับข้อมูล:**
    - ราคาทุกตัวต้องอยู่ในช่วง 20-60 บาท (หรือเป็น `"-"`/null ที่ยอมรับได้)
@@ -120,6 +125,6 @@ API ข้างต้นให้แค่ราคาปัจจุบัน 
 1. ยืนยันว่า endpoint `wp-json/oil-api/v1/oil-prices` ยังใช้งานได้และ schema ตรงกับตัวอย่างข้างบน
 2. Scaffold Next.js project (static export config สำหรับ Vercel)
 3. เขียน fetcher script (Node.js) + sanity check logic
-4. เขียน GitHub Actions workflow (cron ตี 17:00 Asia/Bangkok)
+4. เขียน GitHub Actions workflow (cron 05:00, 06:00, 17:30, 22:00, 00:00 Asia/Bangkok)
 5. ออกแบบหน้า UI: ตารางราคาต่อยี่ห้อ/ผลิตภัณฑ์ + timestamp อัปเดตล่าสุด + structured data
 6. Setup deploy ไป Vercel

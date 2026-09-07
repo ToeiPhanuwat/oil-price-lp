@@ -156,6 +156,52 @@ function sameData(a, b) {
   return JSON.stringify(strip(a)) === JSON.stringify(strip(b));
 }
 
+/** Today's calendar date in Bangkok, e.g. "2026-09-08". */
+function todayInBangkok(now = new Date()) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Bangkok" }).format(now);
+}
+
+/** EPPO publishes an evening announcement carrying the *next* morning's
+ *  effective date, and the API has no separate "tomorrow" field — the new
+ *  number simply replaces the old one hours before it is real at the pump.
+ *  Publishing it right away would show tomorrow's price tonight, so a change
+ *  whose brands all take effect in the future is held back; the 00:00 run
+ *  publishes it. A change that is already in effect goes out immediately.
+ *
+ *  Returns the date to hold until, or null when there is nothing to hold. */
+function holdUntil(next, prev, now = new Date()) {
+  const today = todayInBangkok(now);
+  const changed = Object.entries(next.brands).filter(
+    ([key, brand]) => JSON.stringify(brand) !== JSON.stringify(prev?.brands?.[key]),
+  );
+  if (!changed.length) return null;
+
+  const dates = changed.map(([, brand]) => brand.effective_date);
+  // An undated brand cannot be proven to be in the future — treat it as live.
+  if (dates.some((date) => !date || date <= today)) return null;
+  return dates.sort().at(-1);
+}
+
+/** The daily "still current as of" mark: 05:00 Asia/Bangkok today, the hour new
+ *  prices take effect. Null before 05:00, when today's mark has not arrived. */
+function dailyStamp(now = new Date()) {
+  const at = new Date(`${todayInBangkok(now)}T05:00:00+07:00`);
+  return at <= now ? at.toISOString() : null;
+}
+
+/** The page's "อัปเดตล่าสุด" line has to move on the many days when no brand
+ *  changes its price, so the first run at or after 05:00 restamps the unchanged
+ *  file with today's mark. Restamps `prev`, never `next`: prices being held for
+ *  a future effective date must not ride along with the timestamp.
+ *
+ *  Returns the file to write, or null when today is already stamped. */
+function refreshDailyStamp(prev, now = new Date()) {
+  const stamp = dailyStamp(now);
+  if (!prev || !stamp) return null;
+  if (Date.parse(prev.updated_at) >= Date.parse(stamp)) return null;
+  return { ...prev, updated_at: stamp };
+}
+
 async function main() {
   const payload = await fetchPrices();
   await mkdir(dirname(RAW_OUT), { recursive: true });
@@ -185,10 +231,24 @@ async function main() {
     console.log("--dry: not writing");
     return;
   }
-  if (sameData(next, prev)) {
-    console.log("No price change since last run — not writing.");
+  const unchanged = sameData(next, prev);
+  const pending = unchanged ? null : holdUntil(next, prev);
+  if (unchanged || pending) {
+    console.log(
+      pending
+        ? `New prices take effect ${pending} — holding them until then.`
+        : "No price change since last run.",
+    );
+    const refreshed = refreshDailyStamp(prev);
+    if (!refreshed) {
+      console.log("Timestamp is already current — not writing.");
+      return;
+    }
+    await writeFile(OUT, JSON.stringify(refreshed, null, 2) + "\n");
+    console.log(`Restamped updated_at to ${refreshed.updated_at}.`);
     return;
   }
+
   await writeFile(OUT, JSON.stringify(next, null, 2) + "\n");
   console.log(`Wrote ${OUT}`);
 }
