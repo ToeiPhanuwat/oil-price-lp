@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-09-30T22:00:00.000Z",
+  "updated_at": "2026-10-02T01:30:46.916Z",
   "source": "https://www.eppo.go.th/wp-json/oil-api/v1/oil-prices",
-  "source_last_updated": "24 September 2026",
+  "source_last_updated": "2 October 2026",
   "products": [
     {
       "slug": "gasohol_95",
@@ -55,67 +55,67 @@
   "brands": {
     "ptt": {
       "name": "พีทีที สเตชั่น",
-      "effective_date": "2026-09-24",
+      "effective_date": "2026-10-02",
       "effective_time": "05:00",
       "products": {
         "gasohol_95": {
           "name": "แก๊สโซฮอล์ 95",
-          "price": 39.94,
-          "effective_date": "2026-09-24",
+          "price": 40.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_91": {
           "name": "แก๊สโซฮอล์ 91",
-          "price": 39.57,
-          "effective_date": "2026-09-24",
+          "price": 40.32,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_e20": {
           "name": "แก๊สโซฮอล์ E20",
-          "price": 34.94,
-          "effective_date": "2026-09-24",
+          "price": 35.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_e85": {
           "name": "แก๊สโซฮอล์ E85",
-          "price": 30.88,
-          "effective_date": "2026-09-24",
+          "price": 31.63,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_95_premium": {
           "name": "แก๊สโซฮอล์ 95",
           "price": 47.79,
-          "effective_date": "2026-09-24",
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_99_premium": {
           "name": "แก๊สโซฮอล์ 99",
           "price": 49.79,
-          "effective_date": "2026-09-24",
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "benzine_95": {
           "name": "เบนซิน 95",
-          "price": 48.93,
-          "effective_date": "2026-09-24",
+          "price": 49.68,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b7": {
           "name": "ดีเซล B7",
-          "price": 41.44,
-          "effective_date": "2026-09-24",
+          "price": 42.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b20": {
           "name": "ดีเซล B20",
-          "price": 36.44,
-          "effective_date": "2026-09-24",
+          "price": 37.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_premium": {
           "name": "ดีเซล",
           "price": 50.05,
-          "effective_date": "2026-09-24",
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         }
       },
@@ -123,55 +123,55 @@
     },
     "bcp": {
       "name": "บางจาก",
-      "effective_date": "2026-09-24",
+      "effective_date": "2026-10-02",
       "effective_time": "05:00",
       "products": {
         "gasohol_95": {
           "name": "แก๊สโซฮอล์ 95",
-          "price": 39.94,
-          "effective_date": "2026-09-24",
+          "price": 40.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_91": {
           "name": "แก๊สโซฮอล์ 91",
-          "price": 39.57,
-          "effective_date": "2026-09-24",
+          "price": 40.32,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_e20": {
           "name": "แก๊สโซฮอล์ E20",
-          "price": 34.94,
-          "effective_date": "2026-09-24",
+          "price": 35.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_e85": {
           "name": "แก๊สโซฮอล์ E85",
-          "price": 30.88,
-          "effective_date": "2026-09-24",
+          "price": 31.63,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_95_premium": {
           "name": "แก๊สโซฮอล์ 95",
           "price": 49.29,
-          "effective_date": "2026-09-24",
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b7": {
           "name": "ดีเซล B7",
-          "price": 41.44,
-          "effective_date": "2026-09-24",
+          "price": 42.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b20": {
           "name": "ดีเซล B20",
-          "price": 36.44,
-          "effective_date": "2026-09-24",
+          "price": 37.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_premium": {
           "name": "ดีเซล",
           "price": 50.05,
-          "effective_date": "2026-09-24",
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         }
       },
@@ -179,49 +179,49 @@
     },
     "shell": {
       "name": "เชลล์",
-      "effective_date": "2026-09-24",
+      "effective_date": "2026-10-02",
       "effective_time": "05:00",
       "products": {
         "gasohol_95": {
           "name": "แก๊สโซฮอล์ 95",
-          "price": 40.44,
-          "effective_date": "2026-09-24",
+          "price": 41.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_91": {
           "name": "แก๊สโซฮอล์ 91",
-          "price": 40.07,
-          "effective_date": "2026-09-24",
+          "price": 40.82,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_e20": {
           "name": "แก๊สโซฮอล์ E20",
-          "price": 35.14,
-          "effective_date": "2026-09-24",
+          "price": 35.89,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_95_premium": {
           "name": "แก๊สโซฮอล์ 95",
           "price": 51.84,
-          "effective_date": "2026-09-24",
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b7": {
           "name": "ดีเซล B7",
-          "price": 41.44,
-          "effective_date": "2026-09-24",
+          "price": 42.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b20": {
           "name": "ดีเซล B20",
-          "price": 36.44,
-          "effective_date": "2026-09-24",
+          "price": 37.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_premium": {
           "name": "ดีเซล",
           "price": 51.84,
-          "effective_date": "2026-09-24",
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         }
       },
@@ -229,49 +229,49 @@
     },
     "caltex": {
       "name": "คาลเท็กซ์",
-      "effective_date": "2026-09-24",
+      "effective_date": "2026-10-02",
       "effective_time": "05:00",
       "products": {
         "gasohol_95": {
           "name": "แก๊สโซฮอล์ 95",
-          "price": 39.94,
-          "effective_date": "2026-09-24",
+          "price": 40.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_91": {
           "name": "แก๊สโซฮอล์ 91",
-          "price": 39.57,
-          "effective_date": "2026-09-24",
+          "price": 40.32,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_e20": {
           "name": "แก๊สโซฮอล์ E20",
-          "price": 34.94,
-          "effective_date": "2026-09-24",
+          "price": 35.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "benzine_95": {
           "name": "เบนซิน 95",
           "price": 49.26,
-          "effective_date": "2026-09-24",
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b7": {
           "name": "ดีเซล B7",
-          "price": 41.44,
-          "effective_date": "2026-09-24",
+          "price": 42.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b20": {
           "name": "ดีเซล B20",
-          "price": 36.44,
-          "effective_date": "2026-09-24",
+          "price": 37.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_premium": {
           "name": "ดีเซล",
           "price": 50.05,
-          "effective_date": "2026-09-24",
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         }
       },
@@ -279,25 +279,25 @@
     },
     "irpc": {
       "name": "ไออาร์พีซี",
-      "effective_date": "2026-09-24",
+      "effective_date": "2026-10-02",
       "effective_time": "05:00",
       "products": {
         "gasohol_95": {
           "name": "แก๊สโซฮอล์ 95",
-          "price": 39.94,
-          "effective_date": "2026-09-24",
+          "price": 40.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_91": {
           "name": "แก๊สโซฮอล์ 91",
-          "price": 39.57,
-          "effective_date": "2026-09-24",
+          "price": 40.32,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b7": {
           "name": "ดีเซล B7",
-          "price": 41.44,
-          "effective_date": "2026-09-24",
+          "price": 42.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         }
       },
@@ -305,43 +305,43 @@
     },
     "pt": {
       "name": "พีที",
-      "effective_date": "2026-09-24",
+      "effective_date": "2026-10-02",
       "effective_time": "05:00",
       "products": {
         "gasohol_95": {
           "name": "แก๊สโซฮอล์ 95",
-          "price": 39.94,
-          "effective_date": "2026-09-24",
+          "price": 40.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_91": {
           "name": "แก๊สโซฮอล์ 91",
-          "price": 39.57,
-          "effective_date": "2026-09-24",
+          "price": 40.32,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_e20": {
           "name": "แก๊สโซฮอล์ E20",
-          "price": 34.94,
-          "effective_date": "2026-09-24",
+          "price": 35.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "benzine_95": {
           "name": "เบนซิน 95",
-          "price": 49.43,
-          "effective_date": "2026-09-24",
+          "price": 50.18,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b7": {
           "name": "ดีเซล B7",
-          "price": 41.44,
-          "effective_date": "2026-09-24",
+          "price": 42.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b20": {
           "name": "ดีเซล B20",
-          "price": 36.44,
-          "effective_date": "2026-09-24",
+          "price": 37.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         }
       },
@@ -349,43 +349,43 @@
     },
     "susco1": {
       "name": "ซัสโก้",
-      "effective_date": "2026-09-24",
+      "effective_date": "2026-10-02",
       "effective_time": "05:00",
       "products": {
         "gasohol_95": {
           "name": "แก๊สโซฮอล์ 95",
-          "price": 39.94,
-          "effective_date": "2026-09-24",
+          "price": 40.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_91": {
           "name": "แก๊สโซฮอล์ 91",
-          "price": 39.57,
-          "effective_date": "2026-09-24",
+          "price": 40.32,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_e20": {
           "name": "แก๊สโซฮอล์ E20",
-          "price": 34.94,
-          "effective_date": "2026-09-24",
+          "price": 35.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "benzine_95": {
           "name": "เบนซิน 95",
-          "price": 49.08,
-          "effective_date": "2026-09-24",
+          "price": 49.83,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b7": {
           "name": "ดีเซล B7",
-          "price": 41.44,
-          "effective_date": "2026-09-24",
+          "price": 42.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b20": {
           "name": "ดีเซล B20",
-          "price": 36.44,
-          "effective_date": "2026-09-24",
+          "price": 37.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         }
       },
@@ -393,43 +393,43 @@
     },
     "susco2": {
       "name": "ซัสโก้ ดีลเลอร์",
-      "effective_date": "2026-09-24",
+      "effective_date": "2026-10-02",
       "effective_time": "05:00",
       "products": {
         "gasohol_95": {
           "name": "แก๊สโซฮอล์ 95",
-          "price": 39.94,
-          "effective_date": "2026-09-24",
+          "price": 40.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_91": {
           "name": "แก๊สโซฮอล์ 91",
-          "price": 39.57,
-          "effective_date": "2026-09-24",
+          "price": 40.32,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_e20": {
           "name": "แก๊สโซฮอล์ E20",
-          "price": 34.94,
-          "effective_date": "2026-09-24",
+          "price": 35.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "benzine_95": {
           "name": "เบนซิน 95",
-          "price": 49.08,
-          "effective_date": "2026-09-24",
+          "price": 49.83,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b7": {
           "name": "ดีเซล B7",
-          "price": 41.44,
-          "effective_date": "2026-09-24",
+          "price": 42.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b20": {
           "name": "ดีเซล B20",
-          "price": 36.44,
-          "effective_date": "2026-09-24",
+          "price": 37.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         }
       },
@@ -437,37 +437,37 @@
     },
     "pure": {
       "name": "เพียว",
-      "effective_date": "2026-09-24",
+      "effective_date": "2026-10-02",
       "effective_time": "05:00",
       "products": {
         "gasohol_95": {
           "name": "แก๊สโซฮอล์ 95",
-          "price": 39.94,
-          "effective_date": "2026-09-24",
+          "price": 40.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_91": {
           "name": "แก๊สโซฮอล์ 91",
-          "price": 39.57,
-          "effective_date": "2026-09-24",
+          "price": 40.32,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "gasohol_e20": {
           "name": "แก๊สโซฮอล์ E20",
-          "price": 34.94,
-          "effective_date": "2026-09-24",
+          "price": 35.69,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b7": {
           "name": "ดีเซล B7",
-          "price": 41.44,
-          "effective_date": "2026-09-24",
+          "price": 42.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         },
         "diesel_b20": {
           "name": "ดีเซล B20",
-          "price": 36.44,
-          "effective_date": "2026-09-24",
+          "price": 37.19,
+          "effective_date": "2026-10-02",
           "effective_time": "05:00"
         }
       },
