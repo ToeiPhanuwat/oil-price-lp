@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-10-19T22:00:00.000Z",
+  "updated_at": "2026-10-20T15:16:16.275Z",
   "source": "https://www.eppo.go.th/wp-json/oil-api/v1/oil-prices",
-  "source_last_updated": "9 October 2026",
+  "source_last_updated": "20 October 2026",
   "products": [
     {
       "slug": "gasohol_95",
@@ -393,43 +393,43 @@
     },
     "susco2": {
       "name": "ซัสโก้ ดีลเลอร์",
-      "effective_date": "2026-10-09",
+      "effective_date": "2026-10-20",
       "effective_time": "05:00",
       "products": {
         "gasohol_95": {
           "name": "แก๊สโซฮอล์ 95",
           "price": 41.44,
-          "effective_date": "2026-10-09",
+          "effective_date": "2026-10-20",
           "effective_time": "05:00"
         },
         "gasohol_91": {
           "name": "แก๊สโซฮอล์ 91",
           "price": 41.07,
-          "effective_date": "2026-10-09",
+          "effective_date": "2026-10-20",
           "effective_time": "05:00"
         },
         "gasohol_e20": {
           "name": "แก๊สโซฮอล์ E20",
           "price": 35.69,
-          "effective_date": "2026-10-09",
+          "effective_date": "2026-10-20",
           "effective_time": "05:00"
         },
         "benzine_95": {
           "name": "เบนซิน 95",
           "price": 50.58,
-          "effective_date": "2026-10-09",
+          "effective_date": "2026-10-20",
           "effective_time": "05:00"
         },
         "diesel_b7": {
           "name": "ดีเซล B7",
           "price": 42.94,
-          "effective_date": "2026-10-09",
+          "effective_date": "2026-10-20",
           "effective_time": "05:00"
         },
         "diesel_b20": {
           "name": "ดีเซล B20",
           "price": 37.19,
-          "effective_date": "2026-10-09",
+          "effective_date": "2026-10-20",
           "effective_time": "05:00"
         }
       },
